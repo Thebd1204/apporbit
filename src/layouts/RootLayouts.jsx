@@ -2,7 +2,7 @@ import React from 'react';
 import { Outlet, useNavigate } from 'react-router';
 import Navbar from '../Components/Navbar';
 import LoadingSpinners from './../Components/LoadingSpinners';
-import Footer from '../pages/Footer/Footer';
+import Footer from '../Components/Footer';
 
 const RootLayouts = () => {
      const { state } = useNavigate();
