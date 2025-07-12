@@ -1,12 +1,15 @@
 import React, { useContext } from "react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import Swal from "sweetalert2";
-import { Tooltip } from "react-tooltip";
 import AuthContext from "../context/AuthContext";
 import LoadingSpinners from "./LoadingSpinners";
+import { FaSignOutAlt, FaUser } from "react-icons/fa";
 
 const Navbar = () => {
   const { loginUser, signOutUser, loading } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
   if (loading) {
     return <LoadingSpinners></LoadingSpinners>;
   }
@@ -38,6 +41,8 @@ const Navbar = () => {
           icon: "success",
           draggable: true,
         });
+
+        navigate("login");
       })
       .catch(() => {
         Swal.fire({
@@ -50,7 +55,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar p-0 mt-2 rounded-xl px-10 py-3">
+    <div className="navbar p-0 mt-2 rounded-xl  py-3">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -87,43 +92,72 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end gap-3">
-        <div className="flex items-center">
+        <div
+          className="dropdown dropdown-end"
+          data-aos="fade-down"
+          data-aos-duration="400"
+        >
           {loginUser && (
             <>
-              <button
-                className="my-anchor-element"
-                data-tooltip-id="my-tooltip"
+              <div
+                tabIndex={0}
+                role="button"
+                aria-haspopup="true"
+                className="flex items-center cursor-pointer"
               >
-                <img
-                  className="w-10 cursor-pointer rounded-full border"
-                  src={
-                    loginUser?.photoURL ||
-                    "https://img.icons8.com/?size=80&id=108639&format=png"
-                  }
-                  alt=""
-                />
-              </button>
-              <Tooltip
-                id="my-tooltip"
-                place="top"
-                anchorSelect=".my-anchor-element"
-              >
-                <p>{loginUser?.displayName}</p>
-              </Tooltip>
+                <button
+                  className="my-anchor-element rounded-full overflow-hidden border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-transform hover:scale-105"
+                  data-tooltip-id="my-tooltip"
+                  aria-label="User menu"
+                >
+                  <img
+                    className="w-10 h-10 object-cover rounded-full"
+                    src={
+                      loginUser?.photoURL ||
+                      "https://img.icons8.com/?size=80&id=108639&format=png"
+                    }
+                    alt={loginUser?.displayName || "User avatar"}
+                  />
+                </button>
+              </div>
             </>
           )}
+
+          <ul
+            tabIndex={0}
+            className="dropdown-content menu bg-white rounded-xl shadow-2xl w-60 mt-3 p-4 space-y-3 z-50 border border-gray-100"
+            role="menu"
+            aria-label="User dropdown menu"
+          >
+            <li className="text-center text-gray-800 font-semibold text-sm border-b pb-2">
+              @{loginUser?.displayName || "User"}
+            </li>
+
+            <li>
+              <NavLink
+                to="dashboard"
+                className="flex items-center gap-2 px-4 py-2 text-gray-700 text-sm font-medium rounded-lg hover:bg-blue-600 hover:text-white transition duration-200"
+                role="menuitem"
+              >
+                <FaUser size={16} /> Dashboard
+              </NavLink>
+            </li>
+
+            <li>
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-2 w-full px-4 py-2 bg-red-500 text-white text-sm font-medium rounded-lg hover:bg-red-600 transition duration-200 focus:outline-none focus:ring-2 focus:ring-red-400"
+                role="menuitem"
+                type="button"
+              >
+                <FaSignOutAlt size={16} /> Logout
+              </button>
+            </li>
+          </ul>
         </div>
 
         <div className="">
-          {loginUser ? (
-            <NavLink
-              onClick={handleLogout}
-              className={"btn hover:bg-indigo-700 hover:text-white"}
-              to={"login"}
-            >
-              Logout
-            </NavLink>
-          ) : (
+          {!loginUser && (
             <>
               <div className="space-x-2">
                 <NavLink

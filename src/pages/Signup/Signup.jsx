@@ -71,6 +71,8 @@ const SignUp = () => {
     trigger("photo");
   };
 
+  // image upload process end
+
   const onSubmit = (data) => {
     const formData = {
       ...data,
