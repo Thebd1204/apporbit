@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useEffect } from "react";
+import AdminStatusPieChart from "./AdminStatusPieChart";
 
 const Statistics = () => {
-    return (
-        <div>
-            Statistics
-        </div>
-    );
+  useEffect(() => {
+    document.title = "Statistics";
+  }, []);
+  return (
+    <div>
+      <AdminStatusPieChart />
+    </div>
+  );
 };
 
 export default Statistics;
