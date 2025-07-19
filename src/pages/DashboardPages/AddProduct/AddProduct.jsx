@@ -4,8 +4,11 @@ import { useDropzone } from "react-dropzone";
 import axios from "axios";
 import AuthContext from "./../../../context/AuthContext";
 import { WithContext as ReactTags } from "react-tag-input";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import useAxiosSecure from "./../../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import LoadingSpinners from "../../../Components/LoadingSpinners";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
 const KeyCodes = {
   comma: 188,
@@ -16,9 +19,11 @@ const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 const AddProduct = () => {
   const { loginUser } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    AOS.init({});
+    document.title = "Add Product";
   }, []);
 
   const {
@@ -33,10 +38,6 @@ const AddProduct = () => {
   const [profilePic, setProfilePic] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [tags, setTags] = useState([]);
-
-  useEffect(() => {
-    document.title = "Add Product";
-  }, []);
 
   const onDrop = useCallback(
     async (acceptedFiles) => {
@@ -93,12 +94,69 @@ const AddProduct = () => {
     setTags(newTags);
   };
 
-  const onSubmit = (data) => {
+  const { data: userData = {}, isLoading } = useQuery({
+    queryKey: ["userInfo", loginUser?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/userInfo/${loginUser?.email}`);
+      return res?.data;
+    },
+  });
+
+  if (isLoading) return <LoadingSpinners />;
+
+  console.log("userData", userData);
+
+  console.log("113", userData?.postLimit);
+
+  const onSubmit = async (data) => {
     const formData = {
       ...data,
       tags: tags.map((tag) => tag.text),
     };
-    console.log("✅ Submitted Data:", formData);
+
+    console.log("formData", formData);
+
+    if (userData.subscription === true) {
+      console.log("subscription");
+      const userRes = await axiosSecure.post("/productInfo", formData);
+      if (userRes?.data?.insertedId || userRes?.data?.acknowledged) {
+        Swal.fire({
+          icon: "success",
+          title: "Post Successful",
+          text: "Your product has been posted successfully!",
+          timer: 1500,
+        });
+        navigate("/dashboard/my-products");
+      }
+    } else if (userData?.postLimit >= 1) {
+      const userRes = await axiosSecure.post("/productInfo", formData);
+      if (userRes?.data?.insertedId || userRes?.data?.acknowledged) {
+        console.log("object");
+        Swal.fire({
+          icon: "success",
+          title: "Post Successful",
+          text: "Your product has been posted successfully!",
+          timer: 1500,
+        });
+        const res = await axiosSecure.patch(`/postLimit/${loginUser?.email}`);
+        console.log(res?.data);
+        navigate("/dashboard/my-products");
+      }
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Subscription Required",
+        text: "Please subscribe to unlock unlimited posting access.",
+        confirmButtonText: "View Subscription Plans",
+        showCancelButton: true,
+        cancelButtonText: "Cancel",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/dashboard/myProfile");
+        }
+      });
+    }
+
     reset();
     setTags([]);
     setProfilePic(null);
@@ -106,8 +164,8 @@ const AddProduct = () => {
 
   return (
     <div
-      className="max-w-4xl mx-auto px-6 py-10 bg-white rounded-2xl shadow-xl"
-      data-aos="fade-up"
+      data-aos="zoom-out-up"
+      className="max-w-4xl mx-auto px-3 md:px-6 py-5 md:py-10 bg-white rounded-2xl shadow-xl"
       data-aos-duration="700"
     >
       <h2
