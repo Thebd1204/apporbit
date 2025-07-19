@@ -4,10 +4,12 @@ import Swal from "sweetalert2";
 import AuthContext from "../context/AuthContext";
 import LoadingSpinners from "./LoadingSpinners";
 import { FaSignOutAlt, FaUser } from "react-icons/fa";
+import { RiArrowDropDownLine } from "react-icons/ri";
 
 const Navbar = () => {
   const { loginUser, signOutUser, loading } = useContext(AuthContext);
 
+  console.log(loginUser);
   const navigate = useNavigate();
 
   if (loading) {
@@ -94,8 +96,7 @@ const Navbar = () => {
       <div className="navbar-end gap-3">
         <div
           className="dropdown dropdown-end"
-          data-aos="fade-down"
-          data-aos-duration="400"
+
         >
           {loginUser && (
             <>
@@ -106,12 +107,12 @@ const Navbar = () => {
                 className="flex items-center cursor-pointer"
               >
                 <button
-                  className="my-anchor-element rounded-full overflow-hidden border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-transform hover:scale-105"
+                  className="flex w-12 h-12 my-anchor-element rounded-full overflow-hidden border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-transform hover:scale-105"
                   data-tooltip-id="my-tooltip"
                   aria-label="User menu"
                 >
                   <img
-                    className="w-10 h-10 object-cover rounded-full"
+                    className="object-cover rounded-full"
                     src={
                       loginUser?.photoURL ||
                       "https://img.icons8.com/?size=80&id=108639&format=png"
@@ -119,6 +120,7 @@ const Navbar = () => {
                     alt={loginUser?.displayName || "User avatar"}
                   />
                 </button>
+                
               </div>
             </>
           )}

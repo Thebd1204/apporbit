@@ -10,3 +10,14 @@
   background-color: #2563EB;
   color: white;
 }
+
+@layer utilities {
+  .animate-spin-slow {
+    animation: spin 6s linear infinite;
+  }
+}
+
+
+
+
+

@@ -4,8 +4,11 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const {
     register,
     handleSubmit,
@@ -18,9 +21,6 @@ const Login = () => {
   useEffect(() => {
     document.title = "Login Page";
   }, []);
-
-  const navigate = useNavigate();
-  const location = useLocation();
 
   const onSubmit = (data) => {
     console.log(data);
@@ -56,7 +56,7 @@ const Login = () => {
 
   const handleGoogleSignUp = () => {
     signInWithGoogle()
-      .then(() => {
+      .then(async (result) => {
         Swal.fire({
           position: "center",
           icon: "success",
@@ -65,6 +65,21 @@ const Login = () => {
           showConfirmButton: true,
           timer: 1500,
         });
+
+        const userData = {
+          name: result?.user?.displayName,
+          email: result?.user?.email,
+          photo: result?.user?.photoURL,
+        };
+
+        console.log("75", location.state);
+
+        const userRes = await axios.post(
+          "https://app-orbit-server-gamma.vercel.app/userInfo",
+          userData
+        );
+        console.log(userRes);
+
         setLoading(false);
         navigate(`${location.state ? location.state : "/"}`);
       })

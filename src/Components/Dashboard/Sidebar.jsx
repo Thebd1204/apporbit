@@ -13,9 +13,16 @@ import {
   FaTimes,
   FaArrowLeft,
 } from "react-icons/fa";
+import useUserRole from "../../hooks/useUserRole";
+import LoadingSpinners from "../LoadingSpinners";
 
 const Sidebar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const { role, roleLoading } = useUserRole();
+
+  console.log("role", role);
+
+  if (roleLoading) return <LoadingSpinners />;
 
   const linkClasses = ({ isActive }) =>
     `flex items-center gap-3 px-4 py-3 rounded-xl transition duration-200 font-semibold text-[15px] ${
@@ -66,82 +73,96 @@ const Sidebar = () => {
         </div>
         <div className="pt-2 md:pt-5">
           <h2 className=" text-2xl font-extrabold md:mt-0 lg:mb-8 text-blue-700 tracking-tight">
-            Admin Dashboard
+           {role} Dashboard
           </h2>
 
           <ul className="space-y-3 my-4">
-            <li>
-              <NavLink
-                to="/dashboard/myprofile"
-                className={linkClasses}
-                onClick={() => setDrawerOpen(false)}
-              >
-                <FaUserCircle className="text-lg" /> My Profile
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/add-product"
-                className={linkClasses}
-                onClick={() => setDrawerOpen(false)}
-              >
-                <FaPlusCircle className="text-lg" /> Add Product
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/my-products"
-                className={linkClasses}
-                onClick={() => setDrawerOpen(false)}
-              >
-                <FaBoxOpen className="text-lg" /> My Products
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/review-queue"
-                className={linkClasses}
-                onClick={() => setDrawerOpen(false)}
-              >
-                <FaClipboardCheck className="text-lg" /> Review Queue
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/reported-contents"
-                className={linkClasses}
-                onClick={() => setDrawerOpen(false)}
-              >
-                <FaFlag className="text-lg" /> Reported Contents
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/statistics"
-                className={linkClasses}
-                onClick={() => setDrawerOpen(false)}
-              >
-                <FaChartLine className="text-lg" /> Statistics
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/manage-users"
-                className={linkClasses}
-                onClick={() => setDrawerOpen(false)}
-              >
-                <FaUsersCog className="text-lg" /> Manage Users
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/manage-coupons"
-                className={linkClasses}
-                onClick={() => setDrawerOpen(false)}
-              >
-                <FaTags className="text-lg" /> Manage Coupons
-              </NavLink>
-            </li>
+            {!roleLoading && role === "users" && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/myprofile"
+                    className={linkClasses}
+                    onClick={() => setDrawerOpen(false)}
+                  >
+                    <FaUserCircle className="text-lg" /> My Profile
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/add-product"
+                    className={linkClasses}
+                    onClick={() => setDrawerOpen(false)}
+                  >
+                    <FaPlusCircle className="text-lg" /> Add Product
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/my-products"
+                    className={linkClasses}
+                    onClick={() => setDrawerOpen(false)}
+                  >
+                    <FaBoxOpen className="text-lg" /> My Products
+                  </NavLink>
+                </li>
+              </>
+            )}
+
+            {!roleLoading && role === "Moderator" && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/review-queue"
+                    className={linkClasses}
+                    onClick={() => setDrawerOpen(false)}
+                  >
+                    <FaClipboardCheck className="text-lg" /> Review Queue
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/reported-contents"
+                    className={linkClasses}
+                    onClick={() => setDrawerOpen(false)}
+                  >
+                    <FaFlag className="text-lg" /> Reported Contents
+                  </NavLink>
+                </li>
+              </>
+            )}
+
+            {!roleLoading && role === "Admin" && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/statistics"
+                    className={linkClasses}
+                    onClick={() => setDrawerOpen(false)}
+                  >
+                    <FaChartLine className="text-lg" /> Statistics
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/manage-users"
+                    className={linkClasses}
+                    onClick={() => setDrawerOpen(false)}
+                  >
+                    <FaUsersCog className="text-lg" /> Manage Users
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/manage-coupons"
+                    className={linkClasses}
+                    onClick={() => setDrawerOpen(false)}
+                  >
+                    <FaTags className="text-lg" /> Manage Coupons
+                  </NavLink>
+                </li>
+              </>
+            )}
           </ul>
         </div>
         <div className="text-sm text-gray-400 mt-10 absolute bottom-4">

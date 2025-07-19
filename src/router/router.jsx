@@ -13,6 +13,11 @@ import ReportedContents from "../pages/DashboardPages/ReportedContents/ReportedC
 import Statistics from "../pages/DashboardPages/Statistics/Statistics";
 import ManageUsers from "../pages/DashboardPages/ManageUsers/ManageUsers";
 import ManageCoupons from "../pages/DashboardPages/ManageCoupons/ManageCoupons";
+import ProductDetails from "../pages/DashboardPages/ProductDetails/ProductDetails";
+import ProductUpdate from "../pages/DashboardPages/ProductUpdate/ProductUpdate";
+import ErrorPages from "../pages/ErrorPages/ErrorPages";
+import CouponUpdate from "../Components/CouponUpdate";
+import PrivetRoutes from "../pages/PrivetRoutes/PrivetRoutes";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +37,14 @@ const router = createBrowserRouter([
         Component: Products,
       },
       {
+        path: "product-details/:id",
+        element: (
+          <PrivetRoutes>
+            <ProductDetails></ProductDetails>
+          </PrivetRoutes>
+        ),
+      },
+      {
         path: "login",
         Component: Login,
       },
@@ -39,45 +52,119 @@ const router = createBrowserRouter([
         path: "signup",
         Component: SignUp,
       },
+      {
+        path: "*",
+        Component: ErrorPages,
+      },
     ],
   },
   {
     path: "/dashboard",
-    Component: DashboardLayouts,
+    element: (
+      <PrivetRoutes>
+        <DashboardLayouts></DashboardLayouts>
+      </PrivetRoutes>
+    ),
     children: [
       {
         path: "myProfile",
-        Component: MyProfile,
+        element: (
+          <PrivetRoutes>
+            <MyProfile></MyProfile>
+          </PrivetRoutes>
+        ),
       },
       {
         path: "add-product",
-        Component: AddProduct,
+        element: (
+          <PrivetRoutes>
+            <AddProduct></AddProduct>
+          </PrivetRoutes>
+        ),
       },
       {
         path: "my-products",
-        Component: MyProducts,
+        element: (
+          <PrivetRoutes>
+            <MyProducts></MyProducts>
+          </PrivetRoutes>
+        ),
+      },
+      {
+        path: "product-details/:id",
+        element: (
+          <PrivetRoutes>
+            <ProductDetails></ProductDetails>
+          </PrivetRoutes>
+        ),
+      },
+      {
+        path: "product-update/:id",
+        element: (
+          <PrivetRoutes>
+            <ProductUpdate></ProductUpdate>
+          </PrivetRoutes>
+        ),
       },
       {
         path: "review-queue",
-        Component: ReviewQueue,
+        element: (
+          <PrivetRoutes>
+            <ReviewQueue></ReviewQueue>
+          </PrivetRoutes>
+        ),
       },
       {
         path: "reported-contents",
-        Component: ReportedContents,
+        element: (
+          <PrivetRoutes>
+            <ReportedContents></ReportedContents>
+          </PrivetRoutes>
+        ),
       },
       {
         path: "statistics",
-        Component: Statistics,
+        element: (
+          <PrivetRoutes>
+            <Statistics></Statistics>
+          </PrivetRoutes>
+        ),
       },
       {
         path: "manage-users",
-        Component: ManageUsers,
+        element: (
+          <PrivetRoutes>
+            <ManageUsers></ManageUsers>
+          </PrivetRoutes>
+        ),
       },
       {
         path: "manage-coupons",
         Component: ManageCoupons,
+        element: (
+          <PrivetRoutes>
+            <ManageCoupons></ManageCoupons>
+          </PrivetRoutes>
+        ),
+      },
+      {
+        path: "manage-coupons/coupon-update/:id",
+        Component: CouponUpdate,
+        element: (
+          <PrivetRoutes>
+            <CouponUpdate></CouponUpdate>
+          </PrivetRoutes>
+        ),
+      },
+      {
+        path: "*",
+        Component: ErrorPages,
       },
     ],
+  },
+  {
+    path: "*",
+    Component: ErrorPages,
   },
 ]);
 

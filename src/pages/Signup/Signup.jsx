@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "axios";
 import { useDropzone } from "react-dropzone";
+
 const SignUp = () => {
   const {
     register,
@@ -82,7 +83,7 @@ const SignUp = () => {
     console.log("Form Data:", formData);
     const { name, email, password, photo } = formData;
     createUser(email, password)
-      .then(() => {
+      .then(async () => {
         Swal.fire({
           position: "center",
           icon: "success",
@@ -92,16 +93,18 @@ const SignUp = () => {
           timer: 1500,
         });
 
-        // const userData = {
-        //   name,
-        //   email,
-        //   photo,
-        // };
+        const userData = {
+          name,
+          email,
+          photo,
+        };
 
-        // axios
-        //   .post("", userData)
-        //   .then(() => {})
-        //   .catch(() => {});
+        const userRes = await axios.post(
+          "https://app-orbit-server-gamma.vercel.app/userInfo",
+          userData
+        );
+
+        console.log(userRes.data);
 
         profileUpdate({ displayName: name, photoURL: photo })
           .then(() => {
@@ -127,13 +130,27 @@ const SignUp = () => {
 
   const handleGoogleSignUp = () => {
     signInWithGoogle()
-      .then(() => {
+      .then(async (result) => {
         Swal.fire({
           title: "Registration Successful!",
           text: "Registration successful. Let's get started!",
           icon: "success",
           draggable: true,
         });
+
+        const userData = {
+          name: result?.user?.displayName,
+          email: result?.user?.email,
+          photo: result?.user?.photoURL,
+        };
+
+        const userRes = await axios.post(
+          "https://app-orbit-server-gamma.vercel.app/userInfo",
+          userData
+        );
+
+        console.log(userRes.data);
+
         setLoading(false);
         navigate(`${location.state ? location.state : "/"}`);
       })
