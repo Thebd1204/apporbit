@@ -66,7 +66,7 @@ const ReportedContents = () => {
       className="overflow-x-auto mt-10 px-2 md:px-4 lg:px-6"
       data-aos="zoom-out-down"
     >
-      <div className="w-full inline-block shadow-lg rounded-xl overflow-hidden bg-white">
+      <div className="w-full inline-block shadow-lg rounded-xl overflow-x-auto bg-white">
         <table className="w-full text-sm md:text-[14px] text-gray-700 text-center border-collapse">
           <thead className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white uppercase tracking-wider">
             <tr>

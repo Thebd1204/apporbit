@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import AuthContext from "../../../context/AuthContext";
 import Payment from "./Payment";
 
-
 const MyProfile = () => {
   const { loginUser } = useContext(AuthContext);
 
@@ -13,7 +12,7 @@ const MyProfile = () => {
 
   return (
     <div
-      className="min-h-screen bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] flex items-center justify-center px-4 py-10"
+      className="min-h-screen bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] rounded-2xl flex items-center justify-center px-4 py-10"
       data-aos="zoom-in-up"
     >
       <motion.div
@@ -61,20 +60,23 @@ const MyProfile = () => {
         </motion.div>
 
         {/* Info */}
-        <div className="text-center mt-8 text-white">
-          <h2 className="text-3xl font-bold drop-shadow">
-            {loginUser?.displayName || "Anonymous"}
+        <div className="mt-8 text-white text-center">
+          <h2
+            className="text-3xl font-bold drop-shadow max-w-[200px] mx-auto truncate"
+            title={loginUser?.displayName}
+          >
+            {loginUser?.displayName}
           </h2>
-          <p className="text-gray-300 text-sm mt-1">{loginUser?.email}</p>
+
+          <p className="text-gray-300  text-sm mt-1 max-w-[160px] mx-auto truncate md:max-w-none md:whitespace-normal md:overflow-visible md:text-ellipsis">
+            {loginUser?.email}
+          </p>
         </div>
 
         {/* Payment Section */}
         <div className="mt-6">
           <Payment />
         </div>
-
-         
-
       </motion.div>
     </div>
   );

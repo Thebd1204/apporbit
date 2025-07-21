@@ -315,7 +315,10 @@ const AddProduct = () => {
           />
         </div>
 
-        <div className="border-t pt-6 space-y-4" data-aos="fade-up">
+        <div
+          className="border-t border-dashed border-gray-400 pt-6 space-y-4"
+          data-aos="fade-up"
+        >
           <p className="text-lg font-bold text-gray-700">Product Owner Info</p>
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-1">
@@ -326,7 +329,7 @@ const AddProduct = () => {
               type="text"
               defaultValue={loginUser?.displayName || ""}
               readOnly
-              className="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600"
+              className="w-full px-4 py-2 border rounded-md bg-gray-100 border-gray-300 text-gray-600"
             />
           </div>
           <div>
@@ -338,7 +341,7 @@ const AddProduct = () => {
               type="url"
               defaultValue={loginUser?.photoURL || ""}
               readOnly
-              className="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600"
+              className="w-full px-4 py-2 border rounded-md bg-gray-100 border-gray-300 text-gray-600"
             />
           </div>
           <div>
@@ -350,7 +353,7 @@ const AddProduct = () => {
               type="email"
               defaultValue={loginUser?.email || ""}
               readOnly
-              className="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600"
+              className="w-full px-4 py-2 border rounded-md bg-gray-100 border-gray-300 text-gray-600"
             />
           </div>
         </div>

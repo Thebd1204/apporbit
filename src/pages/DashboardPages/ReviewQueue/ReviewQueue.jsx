@@ -74,7 +74,7 @@ const ReviewQueue = () => {
       data-aos-offset="500"
       data-aos-duration="500"
     >
-      <div className="w-full inline-block shadow-lg rounded-xl overflow-hidden bg-white">
+      <div className="w-full inline-block shadow-lg rounded-xl overflow-x-auto bg-white">
         <table className="w-full min-w-[700px] text-sm md:text-[14px] text-gray-700 text-center border-collapse">
           <thead className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white uppercase tracking-wider">
             <tr>
