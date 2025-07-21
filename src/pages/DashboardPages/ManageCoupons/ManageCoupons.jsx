@@ -75,7 +75,7 @@ const ManageCoupons = () => {
 
   return (
     <div
-      className="min-h-screen bg-gray-100 flex flex-col items-center px-4 space-y-10"
+      className="min-h-screen bg-gray-100 flex flex-col items-center px-0 md:px-4 space-y-10"
       data-aos="fade-left"
     >
       <div className="">
@@ -87,7 +87,7 @@ const ManageCoupons = () => {
       </div>
 
       {/* Add Coupon Form Section */}
-      <section className="w-full max-w-2xl bg-white rounded-lg shadow p-8">
+      <section className="w-full max-w-2xl bg-white rounded-lg shadow p-2 py-4 lg:p-8">
         <h2 className="text-2xl font-bold text-center  text-blue-700 mb-8">
           Add Coupon
         </h2>

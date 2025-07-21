@@ -140,7 +140,6 @@ const router = createBrowserRouter([
       },
       {
         path: "manage-coupons",
-        Component: ManageCoupons,
         element: (
           <PrivetRoutes>
             <ManageCoupons></ManageCoupons>
@@ -149,7 +148,6 @@ const router = createBrowserRouter([
       },
       {
         path: "manage-coupons/coupon-update/:id",
-        Component: CouponUpdate,
         element: (
           <PrivetRoutes>
             <CouponUpdate></CouponUpdate>

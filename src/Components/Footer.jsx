@@ -1,13 +1,19 @@
 import React from "react";
+import { Link } from "react-router";
 
 const Footer = () => {
   return (
     <div className="footer footer-horizontal footer-center bg-base-200 text-base-content rounded p-10">
       <nav className="grid grid-flow-col gap-4">
-        <a className="link link-hover">About us</a>
-        <a className="link link-hover">Contact</a>
-        <a className="link link-hover">Jobs</a>
-        <a className="link link-hover">Press kit</a>
+        <Link to={"/"} className="link link-hover">
+          Home
+        </Link>
+        <Link to={"/products"} className="link link-hover">
+          Product
+        </Link>
+        <Link className="link link-hover">Contact Us</Link>
+        <Link className="link link-hover">Terms & Condition</Link>
+        <Link className="link link-hover">Privacy & Policy</Link>
       </nav>
       <nav>
         <div className="grid grid-flow-col gap-4">
@@ -48,7 +54,8 @@ const Footer = () => {
       </nav>
       <aside>
         <p>
-          Copyright © {new Date().getFullYear()} - All right reserved by AppOrbit
+          Copyright © {new Date().getFullYear()} - All right reserved by
+          AppOrbit
         </p>
       </aside>
     </div>

@@ -84,7 +84,7 @@ const CouponUpdate = () => {
       className="min-h-screen bg-gray-100 flex flex-col items-center px-4 space-y-10"
       data-aos="fade-left"
     >
-      <section className="w-full max-w-2xl bg-white rounded-lg shadow p-8">
+      <section className="w-full max-w-2xl bg-white rounded-lg shadow p-2 py-4 md:p-8">
         <h2 className="text-2xl font-bold text-center  text-blue-700 mb-8">
           Update Coupon Data
         </h2>

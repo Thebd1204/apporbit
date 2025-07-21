@@ -111,6 +111,8 @@ const ProductUpdate = () => {
 
   const { description, externalLink, photo, productName } = productUpdate;
 
+  console.log("114",photo);
+
   const onSubmit = async (data) => {
     const formData = {
       ...data,

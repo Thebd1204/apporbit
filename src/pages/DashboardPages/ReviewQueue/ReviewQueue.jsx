@@ -76,7 +76,7 @@ const ReviewQueue = () => {
       data-aos-duration="500"
     >
       <div className="w-full inline-block shadow-lg rounded-xl overflow-hidden bg-white">
-        <table className="w-full text-sm md:text-[14px] text-gray-700 text-center border-collapse">
+        <table className="w-full min-w-[700px] text-sm md:text-[14px] text-gray-700 text-center border-collapse">
           <thead className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white uppercase tracking-wider">
             <tr>
               <th className="font-semibold px-2 py-3 lg:px-6 lg:py-4">No</th>
@@ -95,11 +95,16 @@ const ReviewQueue = () => {
               </th>
             </tr>
           </thead>
+
           <tbody className="divide-y divide-gray-100">
             {pendingProduct.map((product, index) => (
               <tr key={product._id} className="hover:bg-gray-50 transition">
                 <td className="px-2 py-3 lg:px-6 lg:py-4">{index + 1}</td>
-                <td className="px-2 py-3 lg:px-6 lg:py-4 text-center font-medium text-gray-800">
+
+                <td
+                  className="px-2 py-3 lg:px-6 lg:py-4 text-center font-medium text-gray-800 max-w-[160px] overflow-hidden text-ellipsis whitespace-nowrap"
+                  title={product.productName}
+                >
                   {product.productName}
                 </td>
 
@@ -113,7 +118,7 @@ const ReviewQueue = () => {
 
                 <td className="px-2 py-3 lg:px-6 lg:py-4">
                   <button
-                    disabled={product.isFeatured === true}
+                    disabled={product.isFeatured}
                     onClick={() => handleActions(product._id, "Featured")}
                     className={`text-xs sm:text-sm px-3 py-1 rounded-md transition ${
                       product.isFeatured

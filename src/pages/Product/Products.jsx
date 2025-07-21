@@ -43,7 +43,6 @@ const Products = () => {
           params: {
             searchParams: debouncedSearchTerm,
             page,
-            limit,
           },
         }
       );

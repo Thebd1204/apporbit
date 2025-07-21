@@ -51,7 +51,7 @@ const CouponCard = ({ couponData, refetch, isLoading }) => {
     <div>
       {/* Coupon Cards Section */}
       {couponData.length > 0 && (
-        <section className="w-full mx-auto px-4 mb-12">
+        <section className="w-full mx-auto px-0 lg:px-4 mb-12">
           <h3 className="text-2xl font-bold mb-6 text-gray-900 border-b pb-3">
             Existing Coupons
           </h3>
