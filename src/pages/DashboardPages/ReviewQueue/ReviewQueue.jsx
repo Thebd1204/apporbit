@@ -44,16 +44,25 @@ const ReviewQueue = () => {
           }
         );
         if (res?.data?.modifiedCount > 0) {
-          Swal.fire(
-            "Success!",
-            `Product ${actions.toLowerCase()} successfully.`,
-            "success"
-          );
+          Swal.fire({
+            title: "Success!",
+            text: `Product ${actions.toLowerCase()} successfully.`,
+            icon: "success",
+            timer: 1500,
+            showConfirmButton: false,
+          });
+
           refetch();
         }
       } catch (error) {
         console.error("Error updating status:", error);
-        Swal.fire("Error!", "Something went wrong.", "error");
+        Swal.fire({
+          title: "Error!",
+          text: "Something went wrong.",
+          icon: "error",
+          timer: 1500,
+          showConfirmButton: false,
+        });
       }
     }
   };

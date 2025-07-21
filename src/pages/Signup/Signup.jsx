@@ -89,7 +89,6 @@ const SignUp = () => {
           icon: "success",
           title: "Registration Successful!",
           text: "Registration successful. Let's get started!",
-          showConfirmButton: true,
           timer: 1500,
         });
 
@@ -119,8 +118,10 @@ const SignUp = () => {
           title: "Registration Failed",
           text: "Something went wrong. Please try again.",
           icon: "error",
-          draggable: true,
+          timer: 1500,
+          showConfirmButton: false,
         });
+
         setLoading(false);
         return;
       });
@@ -133,9 +134,10 @@ const SignUp = () => {
       .then(async (result) => {
         Swal.fire({
           title: "Registration Successful!",
-          text: "Registration successful. Let's get started!",
+          text: "Let's get started!",
           icon: "success",
-          draggable: true,
+          timer: 1500,
+          showConfirmButton: false,
         });
 
         const userData = {
@@ -158,7 +160,9 @@ const SignUp = () => {
         Swal.fire({
           title: "Sign in with Google failed",
           icon: "error",
-          draggable: true,
+          text: "Please try again.",
+          timer: 1500,
+          showConfirmButton: false,
         });
       });
   };

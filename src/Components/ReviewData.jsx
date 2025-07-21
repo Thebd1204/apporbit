@@ -24,46 +24,137 @@ const ReviewData = () => {
   if (isLoading) return <LoadingSpinners />;
 
   return (
-    <div className="my-12">
+    <div className="my-12 py-4">
       <h1 className="text-blue-700 text-center font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl hover:scale-110 transition-all duration-800">
         What Our Users Say
       </h1>
-      <Marquee pauseOnHover speed={50}>
-        {reviewData.map((review) => (
-          <div
-            key={review._id}
-            className="bg-white shadow-lg border mt-8 border-gray-300 rounded-lg p-4 mx-4 w-80 flex-shrink-0"
-            data-aos="fade-up"
-          >
-            <div className="flex items-center space-x-4 mb-3">
-              <img
-                src={review.reviewerImage}
-                alt={review.reviewerName}
-                className="w-12 h-12 rounded-full border border-gray-300"
-              />
-              <div>
-                <h4 className="font-semibold">{review.reviewerName}</h4>
-                <p className="text-sm text-gray-500">
-                  {new Date(review.timestamp).toLocaleDateString("en-GB", {
-                    day: "2-digit",
-                    month: "short",
-                    year: "numeric",
-                  })}{" "}
-                </p>
+
+      <div className="">
+        <Marquee
+          pauseOnHover
+          speed={50}
+          gradient={true}
+          gradientColor={[255, 255, 255]}
+          gradientWidth={100}
+          direction="left"
+          className="mt-12"
+        >
+          {reviewData.map((review) => (
+            <div
+              key={review._id}
+              className="bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 ease-in-out p-6 mx-6 w-80 flex-shrink-0"
+              data-aos="fade-up"
+            >
+              {/* Reviewer Info */}
+              <div className="flex items-center gap-4 mb-4">
+                <img
+                  src={review.reviewerImage}
+                  alt={review.reviewerName}
+                  className="w-14 h-14 rounded-full border-2 border-gray-200 object-cover"
+                />
+                <div>
+                  <h4 className="text-lg font-bold text-gray-800">
+                    {review.reviewerName}
+                  </h4>
+                  <p className="text-sm text-gray-500">
+                    {new Date(review.timestamp).toLocaleDateString("en-GB", {
+                      day: "2-digit",
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </p>
+                </div>
+              </div>
+
+              {/* Review Content */}
+              <p className="relative text-gray-700 text-sm leading-relaxed italic mb-4 pl-6">
+                <span className="absolute left-0 top-0 text-2xl text-gray-300 leading-none">
+                  “
+                </span>
+                {review.review}
+              </p>
+
+              {/* Rating Stars */}
+              <div className="flex items-center gap-0.5">
+                {Array.from({ length: review.rating }, (_, i) => (
+                  <span key={i} className="text-yellow-500 text-lg">
+                    ★
+                  </span>
+                ))}
+                {Array.from({ length: 5 - review.rating }, (_, i) => (
+                  <span key={i} className="text-gray-300 text-lg">
+                    ★
+                  </span>
+                ))}
               </div>
             </div>
-            <p className="text-gray-700 mb-2">"{review.review}"</p>
-            <div className="text-yellow-500 text-sm">
-              {Array.from({ length: review.rating }, (_, i) => (
-                <span key={i}>★</span>
-              ))}
-              {Array.from({ length: 5 - review.rating }, (_, i) => (
-                <span key={i}>☆</span>
-              ))}
+          ))}
+        </Marquee>
+      </div>
+      <div className="">
+        <Marquee
+          pauseOnHover
+          speed={50}
+          gradient={true}
+          gradientColor={[255, 255, 255]}
+          gradientWidth={100}
+          direction="right"
+          className="mt-12"
+        >
+          {reviewData.map((review) => (
+            <div
+              key={review._id}
+              className="bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 ease-in-out p-6 mx-6 w-80 flex-shrink-0"
+              data-aos="fade-up"
+            >
+              {/* Reviewer Info */}
+              <div className="flex items-center gap-4 mb-4">
+                <img
+                  src={review.reviewerImage}
+                  alt={review.reviewerName}
+                  className="w-14 h-14 rounded-full border-2 border-gray-200 object-cover"
+                />
+                <div>
+                  <h4 className="text-lg font-bold text-gray-800">
+                    {review.reviewerName}
+                  </h4>
+                  <p className="text-sm text-gray-500">
+                    {new Date(review.timestamp).toLocaleDateString("en-GB", {
+                      day: "2-digit",
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </p>
+                </div>
+              </div>
+
+              {/* Review Content */}
+              <p className="relative text-gray-700 text-sm leading-relaxed italic mb-4 pl-6">
+                <span className="absolute left-0 top-0 text-2xl text-gray-300 leading-none">
+                  “
+                </span>
+                {review.review}
+              </p>
+
+              {/* Rating Stars */}
+              <div className="flex items-center gap-0.5">
+                {Array.from({ length: review.rating }, (_, i) => (
+                  <span key={i} className="text-yellow-500 text-lg">
+                    ★
+                  </span>
+                ))}
+                {Array.from({ length: 5 - review.rating }, (_, i) => (
+                  <span key={i} className="text-gray-300 text-lg">
+                    ★
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
-      </Marquee>
+          ))}
+        </Marquee>
+      </div>
+      
+
     </div>
   );
 };

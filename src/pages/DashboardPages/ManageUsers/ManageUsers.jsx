@@ -31,10 +31,13 @@ const ManageUsers = () => {
   const handleActions = async (productId, actions) => {
     const confirm = await Swal.fire({
       title: "Are you sure?",
-      text: `You are about to ${actions.toLowerCase()} this product.`,
+      text: `You are about to ${actions.toLowerCase()} this user.`,
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: "Yes, do it!",
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: `Yes, ${actions.toLowerCase()}!`,
+      cancelButtonText: "Cancel",
     });
 
     if (confirm.isConfirmed) {
@@ -43,16 +46,26 @@ const ManageUsers = () => {
           status: actions,
         });
         if (res?.data?.modifiedCount > 0) {
-          Swal.fire(
-            "Success!",
-            `Product ${actions.toLowerCase()} successfully.`,
-            "success"
-          );
+          Swal.fire({
+            icon: "success",
+            title: "Success!",
+            text: `User ${actions.toLowerCase()} successfully.`,
+            timer: 1500,
+            showConfirmButton: false,
+          });
+
           refetch();
         }
       } catch (error) {
         console.error("Error updating status:", error);
-        Swal.fire("Error!", "Something went wrong.", "error");
+        Swal.fire({
+          title: "Oops!",
+          text: "Something went wrong. Please try again later.",
+          icon: "error",
+          timer: 1500,
+          timerProgressBar: true,
+          showConfirmButton: false,
+        });
       }
     }
   };
@@ -73,7 +86,6 @@ const ManageUsers = () => {
               <th className="font-semibold px-2 py-3 lg:px-6 lg:py-4">
                 User Email
               </th>
-              
 
               <th className="font-semibold px-2 py-3 lg:px-6 lg:py-4">
                 Make Moderator
@@ -96,8 +108,6 @@ const ManageUsers = () => {
                 </td>
 
                 <td className="px-2 py-3 lg:px-6 lg:py-4">{users.email}</td>
-
-               
 
                 <td className="px-2 py-3 lg:px-6 lg:py-4">
                   <div className="relative group inline-block">

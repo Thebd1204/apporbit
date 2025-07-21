@@ -48,9 +48,7 @@ const ProductDetails = () => {
     timestamp,
   } = productDetails;
 
-  const dateObj = timestamp?.$date
-    ? new Date(Number(timestamp.$date.$numberLong))
-    : null;
+  const dateObj = timestamp ? new Date(timestamp) : null;
 
   const handleVote = async (id) => {
     if (!loginUser) {
@@ -76,6 +74,8 @@ const ProductDetails = () => {
           icon: "success",
           title: "Voted!",
           text: "Your vote has been submitted.",
+          timer: 1500,
+          showConfirmButton: false,
         });
       }
     } catch (error) {
@@ -84,14 +84,26 @@ const ProductDetails = () => {
         icon: "error",
         title: "Error",
         text: "Something went wrong while voting.",
+        timer: 1500,
+        showConfirmButton: false,
       });
     }
   };
 
   const handleReport = async () => {
     try {
-      const res = await axiosSecure.put(`/reported-contents/${id}`);
-      if (res.data.modifiedCount > 0) {
+      const res = await axiosSecure.put(`/reported-contents/${id}`, {
+        userEmail: loginUser.email,
+      });
+
+      if (res.data.alreadyReported) {
+        Swal.fire({
+          icon: "info",
+          title: "Already Reported",
+          text: "You’ve already reported this product.",
+          timer: 1500,
+        });
+      } else if (res.data.modifiedCount > 0) {
         Swal.fire({
           icon: "success",
           title: "Reported!",
@@ -100,9 +112,9 @@ const ProductDetails = () => {
         });
       } else {
         Swal.fire({
-          icon: "info",
-          title: "Already Reported",
-          text: "You’ve already reported this product.",
+          icon: "warning",
+          title: "Not Reported",
+          text: "Unable to report the product.",
           timer: 1500,
         });
       }
@@ -195,10 +207,7 @@ const ProductDetails = () => {
             )}
           </div>
 
-  
           <div className="flex flex-wrap items-center gap-4 justify-start sm:justify-between border-t border-gray-200 pt-4 mt-auto">
-         
-
             <div className="flex items-center justify-between mt-auto">
               <button
                 onClick={() => handleVote(_id)}
@@ -221,7 +230,7 @@ const ProductDetails = () => {
 
             {dateObj && (
               <p className="text-gray-500 text-sm italic select-none whitespace-nowrap">
-                Added on:{" "}
+                Added on :{" "}
                 <time dateTime={dateObj.toISOString()}>
                   {format(dateObj, "PPP")}
                 </time>
@@ -230,7 +239,21 @@ const ProductDetails = () => {
 
             <button
               onClick={handleReport}
-              className="flex items-center gap-2 px-5 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-md transition-transform transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-400"
+              disabled={loginUser?.email === ownerEmail}
+              title={
+                loginUser?.email === ownerEmail
+                  ? "You cannot report on your own product"
+                  : "Report this product"
+              }
+              className={`flex items-center gap-2 px-5 py-2 bg-red-600 hover:bg-red-700
+                 text-white font-semibold rounded-lg shadow-md transition-transform
+                  transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-400
+                  ${
+                    loginUser?.email === ownerEmail
+                      ? "cursor-not-allowed"
+                      : " hover:bg-red-700"
+                  }
+                  `}
               aria-label="Report this product"
             >
               <FaFlag />

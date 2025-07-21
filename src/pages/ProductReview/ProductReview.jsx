@@ -16,8 +16,6 @@ const ProductReview = () => {
 
   const { id } = useParams();
 
-
-
   const handleRating = (rate) => {
     setRating(rate);
   };
@@ -32,9 +30,12 @@ const ProductReview = () => {
   const onSubmit = async (data) => {
     if (rating === 0) {
       Swal.fire({
-        title: "Please select a star rating. ",
+        title: "Please select a star rating.",
         icon: "warning",
+        timer: 1500,
+        showConfirmButton: false,
       });
+
       return;
     }
     const review = {
@@ -51,8 +52,7 @@ const ProductReview = () => {
         title: "Thank you for your review!",
         text: "Your feedback has been submitted successfully.",
         showConfirmButton: false,
-        timer: 2500,
-        timerProgressBar: true,
+        timer: 1500,
         iconColor: "#22c55e",
       });
 
@@ -64,7 +64,8 @@ const ProductReview = () => {
         icon: "error",
         title: "Submission Failed",
         text: "Something went wrong. Please try again.",
-        confirmButtonColor: "#ef4444",
+        timer: 1500,
+        showConfirmButton: false,
       });
     }
   };

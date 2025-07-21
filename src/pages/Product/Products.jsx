@@ -85,6 +85,8 @@ const Products = () => {
           icon: "info",
           title: "Already Voted",
           text: "You’ve already voted on this product.",
+          timer: 1500,
+          showConfirmButton: false,
         });
       }
 
@@ -95,6 +97,8 @@ const Products = () => {
           icon: "success",
           title: "Voted!",
           text: "Your vote has been submitted.",
+          timer: 1500,
+          showConfirmButton: false,
         });
       }
     } catch (error) {
@@ -103,6 +107,8 @@ const Products = () => {
         icon: "error",
         title: "Error",
         text: "Something went wrong while voting.",
+        timer: 1500,
+        showConfirmButton: false,
       });
     }
   };

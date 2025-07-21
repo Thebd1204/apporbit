@@ -31,7 +31,7 @@ const SubscribeNewsletter = () => {
           title: "Subscription Successful!",
           text: `Thanks, ${data.name}! You're now subscribed and will get our latest updates soon.`,
           confirmButtonColor: "#3085d6",
-          timer: 3500,
+          timer: 1500,
         });
         reset();
       } else {
@@ -40,7 +40,7 @@ const SubscribeNewsletter = () => {
           title: "Subscription Failed",
           text: "Something went wrong while saving your subscription. Please try again.",
           confirmButtonColor: "#d33",
-          timer: 2500,
+          timer: 1500,
         });
       }
     } catch (error) {
@@ -49,7 +49,7 @@ const SubscribeNewsletter = () => {
         icon: "error",
         title: "Server Error",
         text: "Could not connect to the server. Please try again later.",
-        timer: 2500,
+        timer: 1500,
       });
     }
   };

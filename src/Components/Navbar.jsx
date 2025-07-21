@@ -38,20 +38,22 @@ const Navbar = () => {
     signOutUser()
       .then(() => {
         Swal.fire({
-          title: "✅ Logout Successful",
+          title: "Logout Successful",
           text: "You have been successfully logged out.",
           icon: "success",
-          draggable: true,
+          timer: 1500,
+          showConfirmButton: false,
         });
 
         navigate("login");
       })
       .catch(() => {
         Swal.fire({
-          title: "❌ Logout Failed",
+          title: "Logout Failed",
           text: "Something went wrong. Please try again.",
           icon: "error",
-          draggable: true,
+          timer: 1500,
+          showConfirmButton: false,
         });
       });
   };
@@ -94,10 +96,7 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end gap-3">
-        <div
-          className="dropdown dropdown-end"
-
-        >
+        <div className="dropdown dropdown-end">
           {loginUser && (
             <>
               <div
@@ -120,7 +119,6 @@ const Navbar = () => {
                     alt={loginUser?.displayName || "User avatar"}
                   />
                 </button>
-                
               </div>
             </>
           )}

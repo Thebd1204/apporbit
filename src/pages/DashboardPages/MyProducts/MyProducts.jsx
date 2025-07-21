@@ -45,12 +45,25 @@ const MyProducts = () => {
       try {
         const res = await axiosSecure.delete(`/product-delete/${id}`);
         if (res?.data?.deletedCount > 0) {
-          Swal.fire("Deleted!", "The content has been deleted.", "success");
+          Swal.fire({
+            title: "Deleted!",
+            text: "The content has been deleted.",
+            icon: "success",
+            timer: 1500,
+            showConfirmButton: false,
+          });
+
           refetch();
         }
       } catch (error) {
         console.error(error);
-        Swal.fire("Error!", "Failed to delete the content.", "error");
+        Swal.fire({
+          title: "Error!",
+          text: "Failed to delete the content.",
+          icon: "error",
+          timer: 1500,
+          timerProgressBar: true,
+        });
       }
     }
   };

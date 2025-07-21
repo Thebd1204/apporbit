@@ -28,7 +28,7 @@ const CouponCard = ({ couponData, refetch, isLoading }) => {
             title: "Deleted!",
             text: "The coupon has been deleted.",
             icon: "success",
-            timer: 2000,
+            timer: 1500,
             showConfirmButton: false,
           });
           refetch();
@@ -38,7 +38,8 @@ const CouponCard = ({ couponData, refetch, isLoading }) => {
           title: "Error!",
           text: "Something went wrong. Try again.",
           icon: "error",
-          confirmButtonText: "OK",
+          timer: 1500,
+          showConfirmButton: false,
         });
       }
     }
@@ -81,7 +82,9 @@ const CouponCard = ({ couponData, refetch, isLoading }) => {
                 </div>
 
                 <div className="flex justify-center gap-4 mt-5">
-                  <Link to={`/dashboard/manage-coupons/coupon-update/${coupon._id}`}>
+                  <Link
+                    to={`/dashboard/manage-coupons/coupon-update/${coupon._id}`}
+                  >
                     <button className="text-blue-600 hover:text-blue-800 flex items-center gap-1 text-sm font-medium transition">
                       <FaEdit /> Edit
                     </button>

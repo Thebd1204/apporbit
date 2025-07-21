@@ -64,6 +64,8 @@ const PaymentForm = () => {
         icon: "error",
         title: "Invalid Coupon",
         text: "No matching coupon code found.",
+        timer: 1500,
+        showConfirmButton: false,
       });
     }
 
@@ -74,6 +76,8 @@ const PaymentForm = () => {
         icon: "warning",
         title: "Coupon Expired",
         text: "This coupon code is no longer valid.",
+        timer: 1500,
+        showConfirmButton: false,
       });
     }
 
@@ -149,7 +153,7 @@ const PaymentForm = () => {
             icon: "success",
             title: "Payment Successful",
             html: `Transaction ID: <strong>${transactionId}</strong>`,
-            timer: 1800,
+            timer: 1500,
           }).then(() => navigate("/dashboard/myProfile"));
         }
         setShowModal(false);
@@ -238,7 +242,7 @@ const PaymentForm = () => {
                 <path d="M12 2L15 8H9L12 2Z M12 22L9 16H15L12 22Z M2 12L8 15V9L2 12Z M22 12L16 9V15L22 12Z" />
               </svg>
               <span className="text-sm sm:text-base lg:text-[15px] ">
-               Membership Subscribe ${finalPayment.toFixed(2)}
+                Membership Subscribe ${finalPayment.toFixed(2)}
               </span>
             </span>
           </button>
