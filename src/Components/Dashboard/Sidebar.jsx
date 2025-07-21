@@ -20,7 +20,6 @@ const Sidebar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const { role, roleLoading } = useUserRole();
 
-  console.log("role", role);
 
   if (roleLoading) return <LoadingSpinners />;
 

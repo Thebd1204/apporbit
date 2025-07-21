@@ -117,7 +117,6 @@ const ProductUpdate = () => {
       tags: tags.map((tag) => tag.text),
     };
 
-    console.log("formData", formData);
 
     const userRes = await axiosSecure.put(`/product-update/${id}`, formData);
     console.log(userRes?.data);

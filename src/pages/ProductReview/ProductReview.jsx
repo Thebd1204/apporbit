@@ -84,7 +84,7 @@ const ProductReview = () => {
 
   if (isLoading) return <LoadingSpinners />;
 
-  console.log(productReview);
+ 
 
   return (
     <>

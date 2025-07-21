@@ -127,20 +127,35 @@ const ReviewQueue = () => {
 
                 <td className="px-2 py-3 lg:px-6 lg:py-4">
                   <button
+                    disabled={product.status === "Accepted"}
                     onClick={() => handleActions(product._id, "Accepted")}
-                    className="text-xs sm:text-sm px-3 py-1 rounded-md text-white transition bg-green-600 hover:bg-green-700"
+                    title={
+                      product.status === "Accepted" ? "Already Accepted" : ""
+                    }
+                    className={`text-xs sm:text-sm px-3 py-1 rounded-md text-white transition font-medium ${
+                      product.status === "Accepted"
+                        ? "bg-gray-400 cursor-not-allowed"
+                        : "bg-emerald-600 hover:bg-emerald-700"
+                    }`}
                   >
-                    Accept
+                    {product.status === "Accepted" ? "Accepted" : "Accept"}
                   </button>
                 </td>
 
                 <td className="px-2 py-3 lg:px-6 lg:py-4">
                   <button
+                    disabled={product.status === "Rejected"}
                     onClick={() => handleActions(product._id, "Rejected")}
-                    className="text-xs sm:text-sm px-3 py-1 rounded-md text-white transition
-                     bg-red-600 hover:bg-red-700"
+                    title={
+                      product.status === "Rejected" ? "Already Rejected" : ""
+                    }
+                    className={`text-xs sm:text-sm px-3 py-1 rounded-md text-white transition font-medium ${
+                      product.status === "Rejected"
+                        ? "bg-gray-400 cursor-not-allowed"
+                        : "bg-rose-600 hover:bg-rose-700"
+                    }`}
                   >
-                    Reject
+                    {product.status === "Rejected" ? "Rejected" : "Reject"}
                   </button>
                 </td>
               </tr>

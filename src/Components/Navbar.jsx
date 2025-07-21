@@ -9,7 +9,6 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 const Navbar = () => {
   const { loginUser, signOutUser, loading } = useContext(AuthContext);
 
-  console.log(loginUser);
   const navigate = useNavigate();
 
   if (loading) {

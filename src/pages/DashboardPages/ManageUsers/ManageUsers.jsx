@@ -26,7 +26,6 @@ const ManageUsers = () => {
 
   if (isLoading) return <LoadingSpinners />;
 
-  console.log(manageUsers);
 
   const handleActions = async (productId, actions) => {
     const confirm = await Swal.fire({

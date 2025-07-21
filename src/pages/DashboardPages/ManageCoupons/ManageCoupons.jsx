@@ -33,7 +33,6 @@ const ManageCoupons = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
     try {
       const res = await axiosSecure.post("/coupon", data);
 

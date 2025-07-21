@@ -15,7 +15,6 @@ const useAxiosSecure = () => {
     return;
   }
 
-  console.log(loginUser);
 
   axiosInstance.interceptors.request.use((config) => {
     config.headers.Authorization = `Bearer ${token}`;

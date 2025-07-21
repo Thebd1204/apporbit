@@ -33,11 +33,8 @@ const CouponUpdate = () => {
   if (isLoading) return <LoadingSpinners />;
 
   const onSubmit = async (data) => {
-    console.log("Updating Coupon:", data);
-
     try {
       const res = await axiosSecure.put(`/coupon/${id}`, data);
-      console.log(res.data);
 
       if (res?.data?.modifiedCount > 0) {
         navigate("/dashboard/manage-coupons");
@@ -62,7 +59,6 @@ const CouponUpdate = () => {
         });
       }
     } catch (error) {
-      console.error("Update Coupon Error:", error);
       Swal.fire({
         icon: "error",
         title: "Update Failed",

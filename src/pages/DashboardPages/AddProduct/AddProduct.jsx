@@ -104,9 +104,7 @@ const AddProduct = () => {
 
   if (isLoading) return <LoadingSpinners />;
 
-  console.log("userData", userData);
-
-  console.log("113", userData?.postLimit);
+  
 
   const onSubmit = async (data) => {
     const formData = {
@@ -114,10 +112,8 @@ const AddProduct = () => {
       tags: tags.map((tag) => tag.text),
     };
 
-    console.log("formData", formData);
 
     if (userData.subscription === true) {
-      console.log("subscription");
       const userRes = await axiosSecure.post("/productInfo", formData);
       if (userRes?.data?.insertedId || userRes?.data?.acknowledged) {
         Swal.fire({
@@ -131,7 +127,7 @@ const AddProduct = () => {
     } else if (userData?.postLimit >= 1) {
       const userRes = await axiosSecure.post("/productInfo", formData);
       if (userRes?.data?.insertedId || userRes?.data?.acknowledged) {
-        console.log("object");
+      
         Swal.fire({
           icon: "success",
           title: "Post Successful",

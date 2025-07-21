@@ -79,8 +79,6 @@ const SignUp = () => {
       ...data,
       photo: profilePic,
     };
-
-    console.log("Form Data:", formData);
     const { name, email, password, photo } = formData;
     createUser(email, password)
       .then(async () => {

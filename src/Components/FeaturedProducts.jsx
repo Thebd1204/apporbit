@@ -22,8 +22,6 @@ const FeaturedProducts = () => {
     },
   });
 
-  console.log(featuredProducts);
-
   const navigate = useNavigate();
 
   const handleVote = async (id) => {
@@ -56,8 +54,7 @@ const FeaturedProducts = () => {
           showConfirmButton: false,
         });
       }
-    } catch (error) {
-      console.error("Vote failed:", error);
+    } catch (_) {
       Swal.fire({
         icon: "error",
         title: "Error",

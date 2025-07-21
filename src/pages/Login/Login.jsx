@@ -23,7 +23,6 @@ const Login = () => {
   }, []);
 
   const onSubmit = (data) => {
-    console.log(data);
 
     const { email, password } = data;
 
@@ -72,7 +71,6 @@ const Login = () => {
           photo: result?.user?.photoURL,
         };
 
-        console.log("75", location.state);
 
         const userRes = await axios.post(
           "https://app-orbit-server-gamma.vercel.app/userInfo",

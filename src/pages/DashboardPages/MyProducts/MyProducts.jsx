@@ -30,7 +30,6 @@ const MyProducts = () => {
 
   if (isLoading || loading) return <LoadingSpinners />;
 
-  console.log(myProducts);
 
   const handleActions = async (id) => {
     const confirm = await Swal.fire({
