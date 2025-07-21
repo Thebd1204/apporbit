@@ -56,7 +56,6 @@ const ManageUsers = () => {
           refetch();
         }
       } catch (error) {
-        console.error("Error updating status:", error);
         Swal.fire({
           title: "Oops!",
           text: "Something went wrong. Please try again later.",

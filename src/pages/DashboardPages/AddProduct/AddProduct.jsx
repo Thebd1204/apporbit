@@ -58,7 +58,7 @@ const AddProduct = () => {
         setValue("photo", imageUrl);
         trigger("photo");
       } catch (err) {
-        console.error("Upload failed:", err);
+        Swal.fire("Upload failed", "Please try again.", "error");
       } finally {
         setUploading(false);
       }
@@ -104,14 +104,11 @@ const AddProduct = () => {
 
   if (isLoading) return <LoadingSpinners />;
 
-  
-
   const onSubmit = async (data) => {
     const formData = {
       ...data,
       tags: tags.map((tag) => tag.text),
     };
-
 
     if (userData.subscription === true) {
       const userRes = await axiosSecure.post("/productInfo", formData);
@@ -127,7 +124,6 @@ const AddProduct = () => {
     } else if (userData?.postLimit >= 1) {
       const userRes = await axiosSecure.post("/productInfo", formData);
       if (userRes?.data?.insertedId || userRes?.data?.acknowledged) {
-      
         Swal.fire({
           icon: "success",
           title: "Post Successful",
@@ -135,7 +131,6 @@ const AddProduct = () => {
           timer: 1500,
         });
         const res = await axiosSecure.patch(`/postLimit/${loginUser?.email}`);
-        console.log(res?.data);
         navigate("/dashboard/my-products");
       }
     } else {

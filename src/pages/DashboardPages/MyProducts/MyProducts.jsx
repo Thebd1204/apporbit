@@ -54,7 +54,6 @@ const MyProducts = () => {
           refetch();
         }
       } catch (error) {
-        console.error(error);
         Swal.fire({
           title: "Error!",
           text: "Failed to delete the content.",

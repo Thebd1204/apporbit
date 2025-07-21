@@ -76,7 +76,6 @@ const Login = () => {
           "https://app-orbit-server-gamma.vercel.app/userInfo",
           userData
         );
-        console.log(userRes);
 
         setLoading(false);
         navigate(`${location.state ? location.state : "/"}`);

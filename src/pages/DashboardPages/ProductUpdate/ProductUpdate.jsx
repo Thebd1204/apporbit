@@ -8,6 +8,7 @@ import { useDropzone } from "react-dropzone";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { WithContext as ReactTags } from "react-tag-input";
+import Swal from "sweetalert2";
 
 const KeyCodes = {
   comma: 188,
@@ -19,13 +20,11 @@ const delimiters = [KeyCodes.comma, KeyCodes.enter];
 const ProductUpdate = () => {
   const { loginUser } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.title = "Product Update";
   }, []);
-
-
 
   const {
     register,
@@ -59,7 +58,7 @@ const ProductUpdate = () => {
         setValue("photo", imageUrl);
         trigger("photo");
       } catch (err) {
-        console.error("Upload failed:", err);
+        Swal.fire("Upload failed", "Please try again.", "error");
       } finally {
         setUploading(false);
       }
@@ -103,15 +102,20 @@ const ProductUpdate = () => {
     queryKey: ["product-details"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/product-details/${id}`);
+      setProfilePic(res?.data?.productImage);
+      const fatchedTags = res?.data?.tags.map((tag) => ({
+        id: tag,
+        text: tag,
+        className: "",
+      }));
+      setTags(fatchedTags);
       return res?.data;
     },
   });
 
   if (isLoading) return <LoadingSpinners />;
 
-  const { description, externalLink, photo, productName } = productUpdate;
-
-  console.log("114",photo);
+  const { description, externalLink, productName } = productUpdate;
 
   const onSubmit = async (data) => {
     const formData = {
@@ -119,9 +123,7 @@ const ProductUpdate = () => {
       tags: tags.map((tag) => tag.text),
     };
 
-
     const userRes = await axiosSecure.put(`/product-update/${id}`, formData);
-    console.log(userRes?.data);
 
     navigate("/dashboard/my-products");
 

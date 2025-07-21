@@ -44,7 +44,6 @@ const SubscribeNewsletter = () => {
         });
       }
     } catch (error) {
-      console.error("Subscription Error:", error);
       Swal.fire({
         icon: "error",
         title: "Server Error",

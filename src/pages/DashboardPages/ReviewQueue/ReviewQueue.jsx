@@ -55,7 +55,6 @@ const ReviewQueue = () => {
           refetch();
         }
       } catch (error) {
-        console.error("Error updating status:", error);
         Swal.fire({
           title: "Error!",
           text: "Something went wrong.",

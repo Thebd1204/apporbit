@@ -59,7 +59,6 @@ const TrendingProducts = () => {
         });
       }
     } catch (error) {
-      console.error("Vote failed:", error);
       Swal.fire({
         icon: "error",
         title: "Error",

@@ -56,7 +56,6 @@ const ManageCoupons = () => {
         });
       }
     } catch (error) {
-      console.error("Add Coupon Error:", error);
       Swal.fire({
         icon: "error",
         title: "Server Error",

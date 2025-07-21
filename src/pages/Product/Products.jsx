@@ -101,7 +101,6 @@ const Products = () => {
         });
       }
     } catch (error) {
-      console.error("Vote failed:", error);
       Swal.fire({
         icon: "error",
         title: "Error",

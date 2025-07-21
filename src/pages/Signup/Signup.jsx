@@ -51,9 +51,7 @@ const SignUp = () => {
         setProfilePic(imageUrl);
         setValue("photo", imageUrl);
         trigger("photo");
-      } catch (err) {
-        console.error("Upload failed:", err);
-      } finally {
+      }  finally {
         setUploading(false);
       }
     },
@@ -101,7 +99,6 @@ const SignUp = () => {
           userData
         );
 
-        console.log(userRes.data);
 
         profileUpdate({ displayName: name, photoURL: photo })
           .then(() => {
@@ -149,7 +146,7 @@ const SignUp = () => {
           userData
         );
 
-        console.log(userRes.data);
+  
 
         setLoading(false);
         navigate(`${location.state ? location.state : "/"}`);
