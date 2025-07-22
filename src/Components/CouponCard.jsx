@@ -81,7 +81,7 @@ const CouponCard = ({ couponData, refetch, isLoading }) => {
                   <p className="text-gray-600 text-sm">{coupon.description}</p>
                 </div>
 
-                <div className="flex justify-center gap-4 mt-5">
+                <div className="flex justify-between gap-4 mt-5">
                   <Link
                     to={`/dashboard/manage-coupons/coupon-update/${coupon._id}`}
                   >

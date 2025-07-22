@@ -1,7 +1,8 @@
 import axios from "axios";
-import { use } from "react";
-import AuthContext from "./../context/AuthContext";
+import { useContext } from "react";
 import Swal from "sweetalert2";
+import AuthContext from "./../context/AuthContext";
+import { getToken } from "../context/AuthProvider";
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -9,9 +10,9 @@ const axiosInstance = axios.create({
 });
 
 const useAxiosSecure = () => {
-  const { loginUser, signOutUser } = use(AuthContext);
-  const token = loginUser?.accessToken;
-  if (!loginUser?.accessToken) {
+  const { signOutUser } = useContext(AuthContext);
+  const token = getToken();
+  if (!token) {
     return;
   }
 
@@ -24,29 +25,27 @@ const useAxiosSecure = () => {
     (res) => res,
     (err) => {
       if (err.status === 401 || err.status === 403) {
-        signOutUser()
-          .then(() => {
-            if (err.status === 401) {
-              Swal.fire({
-                position: "center",
-                icon: "warning",
-                title: "Logged out Session expired",
-                text: `Status ${err.status}`,
-                showConfirmButton: true,
-                timer: 1500,
-              });
-            } else if (err.status === 403) {
-              Swal.fire({
-                position: "center",
-                icon: "warning",
-                title: "Logged out Unauthorized access",
-                text: `Status ${err.status}`,
-                showConfirmButton: true,
-                timer: 1500,
-              });
-            }
-          })
-          .catch((err) => {});
+        signOutUser().then(() => {
+          if (err.status === 401) {
+            Swal.fire({
+              position: "center",
+              icon: "warning",
+              title: "Logged out Session expired",
+              text: `Status ${err.status}`,
+              showConfirmButton: true,
+              timer: 1500,
+            });
+          } else if (err.status === 403) {
+            Swal.fire({
+              position: "center",
+              icon: "warning",
+              title: "Logged out Unauthorized access",
+              text: `Status ${err.status}`,
+              showConfirmButton: true,
+              timer: 1500,
+            });
+          }
+        });
       }
       return Promise.reject(err);
     }

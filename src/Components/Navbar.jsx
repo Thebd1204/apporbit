@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import AuthContext from "../context/AuthContext";
 import LoadingSpinners from "./LoadingSpinners";
 import { FaSignOutAlt, FaUser } from "react-icons/fa";
-import { RiArrowDropDownLine } from "react-icons/ri";
+import logo from "../assets/AppOrbit logo.png";
 
 const Navbar = () => {
   const { loginUser, signOutUser, loading } = useContext(AuthContext);
@@ -85,8 +85,18 @@ const Navbar = () => {
             {navLinks}
           </ul>
         </div>
-        <Link to={"/"} className="btn btn-ghost text-xl p-0">
-          AppOrbit
+        <Link
+          to={"/"}
+          className="btn btn-ghost text-xl p-0 flex items-center gap-2"
+        >
+          <img
+            src={logo}
+            alt="AppOrbit Logo"
+            className="h-6 sm:h-8 md:h-10 lg:h-12 w-auto object-contain"
+          />
+          {/* <span className="hidden sm:inline text-base md:text-xl font-semibold">
+            AppOrbit
+          </span> */}
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">

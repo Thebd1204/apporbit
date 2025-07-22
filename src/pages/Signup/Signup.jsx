@@ -51,7 +51,7 @@ const SignUp = () => {
         setProfilePic(imageUrl);
         setValue("photo", imageUrl);
         trigger("photo");
-      }  finally {
+      } finally {
         setUploading(false);
       }
     },
@@ -90,7 +90,7 @@ const SignUp = () => {
 
         const userData = {
           name,
-          email,
+          email: email?.toLowerCase(),
           photo,
         };
 
@@ -98,7 +98,6 @@ const SignUp = () => {
           "https://app-orbit-server-gamma.vercel.app/userInfo",
           userData
         );
-
 
         profileUpdate({ displayName: name, photoURL: photo })
           .then(() => {
@@ -137,7 +136,7 @@ const SignUp = () => {
 
         const userData = {
           name: result?.user?.displayName,
-          email: result?.user?.email,
+          email: result?.user?.email?.toLowerCase(),
           photo: result?.user?.photoURL,
         };
 
@@ -145,8 +144,6 @@ const SignUp = () => {
           "https://app-orbit-server-gamma.vercel.app/userInfo",
           userData
         );
-
-  
 
         setLoading(false);
         navigate(`${location.state ? location.state : "/"}`);

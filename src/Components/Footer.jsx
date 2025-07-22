@@ -1,10 +1,16 @@
 import React from "react";
 import { Link } from "react-router";
+import logo from "../assets/AppOrbit logo.png";
 
 const Footer = () => {
   return (
     <div className="footer footer-horizontal footer-center bg-base-200 text-base-content rounded p-10">
-      <nav className="grid grid-flow-col gap-4">
+      <img
+        src={logo}
+        alt="AppOrbit Logo"
+        className="h-8 sm:h-9 md:h-10 lg:h-12 w-auto object-contain"
+      />
+      <nav className="flex flex-col items-start gap-2 sm:flex-row sm:justify-center sm:items-center sm:gap-4 md:grid md:grid-flow-col">
         <Link to={"/"} className="link link-hover">
           Home
         </Link>
@@ -15,6 +21,7 @@ const Footer = () => {
         <Link className="link link-hover">Terms & Condition</Link>
         <Link className="link link-hover">Privacy & Policy</Link>
       </nav>
+
       <nav>
         <div className="grid grid-flow-col gap-4">
           <a>
