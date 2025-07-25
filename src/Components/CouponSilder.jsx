@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpinners from "../Components/LoadingSpinners";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -24,9 +22,7 @@ const CouponSlider = () => {
     },
   });
 
-  useEffect(() => {
-    AOS.init({ once: true, duration: 800 });
-  }, []);
+ 
 
   const handleCopy = (code) => {
     navigator.clipboard.writeText(code);

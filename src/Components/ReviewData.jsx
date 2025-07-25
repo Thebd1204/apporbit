@@ -1,16 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useEffect } from "react";
+import React from "react";
 import LoadingSpinners from "./LoadingSpinners";
 import Marquee from "react-fast-marquee";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import axios from "axios";
 
 const ReviewData = () => {
-  useEffect(() => {
-    AOS.init({ duration: 800 });
-  }, []);
-
   const { data: reviewData = [], isLoading } = useQuery({
     queryKey: ["review"],
     queryFn: async () => {

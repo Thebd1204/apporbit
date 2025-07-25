@@ -4,8 +4,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import AuthContext from "../../../context/AuthContext";
 import LoadingSpinners from "./../../../Components/LoadingSpinners";
 import { motion } from "framer-motion";
@@ -49,10 +47,6 @@ const PaymentForm = () => {
 
   const subscription_fee = 99;
   const finalPayment = subscription_fee - discountAmount;
-
-  useEffect(() => {
-    AOS.init({ once: true });
-  }, []);
 
   const handleCouponPayment = () => {
     const matched = coupons.find(

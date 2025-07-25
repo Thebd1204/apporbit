@@ -1,8 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { HiOutlineMail, HiOutlineUser } from "react-icons/hi";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import Swal from "sweetalert2";
 import axios from "axios";
 
@@ -13,10 +11,6 @@ const SubscribeNewsletter = () => {
     formState: { errors },
     reset,
   } = useForm();
-
-  useEffect(() => {
-    AOS.init({ duration: 1000 });
-  }, []);
 
   const onSubmit = async (data) => {
     try {
