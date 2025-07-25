@@ -27,7 +27,7 @@ const ManageCoupons = () => {
   } = useQuery({
     queryKey: ["coupon"],
     queryFn: async () => {
-      const res = await axiosSecure("/coupon");
+      const res = await axiosSecure("/admin-page-coupon");
       return res?.data;
     },
   });

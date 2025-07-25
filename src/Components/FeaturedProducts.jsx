@@ -54,7 +54,7 @@ const FeaturedProducts = () => {
           showConfirmButton: false,
         });
       }
-    } catch (_) {
+    } catch (error) {
       Swal.fire({
         icon: "error",
         title: "Error",
@@ -66,13 +66,12 @@ const FeaturedProducts = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12">
-      <h2
-        className="text-3xl font-bold text-center mb-12 text-gray-800"
-        data-aos="fade-up"
+    <div data-aos="fade-up" className="max-w-7xl mx-auto px-4 py-12">
+      <h1
+        className="text-blue-700 my-10 text-center font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl hover:scale-110 transition-all duration-800"
       >
         Featured Products
-      </h2>
+      </h1>
 
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {featuredProducts?.map(

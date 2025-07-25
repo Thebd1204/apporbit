@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useEffect } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import LoadingSpinners from "../../../Components/LoadingSpinners";
-import { Link } from "react-router";
 import Swal from "sweetalert2";
 
 const ManageUsers = () => {

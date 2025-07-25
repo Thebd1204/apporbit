@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Navigate, NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import {
   FaUserCircle,
   FaPlusCircle,

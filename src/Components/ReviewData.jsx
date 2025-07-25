@@ -24,7 +24,7 @@ const ReviewData = () => {
   if (isLoading) return <LoadingSpinners />;
 
   return (
-    <div className="my-12 py-4">
+    <div className="my-12 py-4" data-aos="fade-up">
       <h1 className="text-blue-700 text-center font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl hover:scale-110 transition-all duration-800">
         What Our Users Say
       </h1>
@@ -153,8 +153,6 @@ const ReviewData = () => {
           ))}
         </Marquee>
       </div>
-      
-
     </div>
   );
 };
