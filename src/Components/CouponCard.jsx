@@ -49,28 +49,27 @@ const CouponCard = ({ couponData, refetch, isLoading }) => {
 
   return (
     <div>
-      {/* Coupon Cards Section */}
       {couponData.length > 0 && (
-        <section className="w-full mx-auto px-0 lg:px-4 mb-12">
-          <h3 className="text-2xl font-bold mb-6 text-gray-900 border-b pb-3">
+        <section className="w-full mx-auto">
+          <h3 className="text-2xl sm:text-3xl font-bold mb-6 text-gray-800 border-b pb-4">
             Existing Coupons
           </h3>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {couponData.map((coupon, idx) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {couponData.map((coupon) => (
               <div
-                key={coupon._id || idx}
-                className=" bg-white border border-gray-200 rounded-xl shadow-md px-10 py-8 min-h-[250px] w-full flex flex-col justify-between hover:shadow-lg transition-all"
+                key={coupon._id}
+                className="bg-white border border-gray-200 rounded-xl shadow-lg p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:border-blue-300"
               >
                 <div>
-                  <h4 className="text-xl font-bold text-purple-700 uppercase mb-2 tracking-wide">
+                  <h4 className="text-xl font-bold text-purple-700 uppercase mb-3 tracking-wider">
                     {coupon.couponCode}
                   </h4>
-                  <p className="text-gray-800 text-sm mb-1">
+                  <p className="text-gray-700 text-base mb-2">
                     <span className="font-semibold">Discount:</span>{" "}
                     {coupon.discount}%
                   </p>
-                  <p className="text-gray-800 text-sm mb-2">
+                  <p className="text-gray-700 text-base mb-3">
                     <span className="font-semibold">Expires:</span>{" "}
                     {new Date(coupon.expiryDate).toLocaleDateString("en-GB", {
                       day: "2-digit",
@@ -78,22 +77,23 @@ const CouponCard = ({ couponData, refetch, isLoading }) => {
                       year: "numeric",
                     })}
                   </p>
-                  <p className="text-gray-600 text-sm">{coupon.description}</p>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    {coupon.description}
+                  </p>
                 </div>
 
-                <div className="flex justify-between gap-4 mt-5">
+                <div className="flex justify-end gap-4 mt-6 pt-4 border-t border-gray-200">
                   <Link
                     to={`/dashboard/manage-coupons/coupon-update/${coupon._id}`}
+                    className="text-blue-600 hover:text-blue-800 flex items-center gap-2 text-sm font-medium transition-colors"
                   >
-                    <button className="text-blue-600 hover:text-blue-800 flex items-center gap-1 text-sm font-medium transition">
-                      <FaEdit /> Edit
-                    </button>
+                    <FaEdit /> <span>Edit</span>
                   </Link>
                   <button
                     onClick={() => handleDelete(coupon._id)}
-                    className="text-red-600 hover:text-red-800 flex items-center gap-1 text-sm font-medium transition"
+                    className="text-red-600 hover:text-red-800 flex items-center gap-2 text-sm font-medium transition-colors"
                   >
-                    <FaTrash /> Delete
+                    <FaTrash /> <span>Delete</span>
                   </button>
                 </div>
               </div>
