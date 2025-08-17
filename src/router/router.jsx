@@ -18,6 +18,9 @@ import ProductUpdate from "../pages/DashboardPages/ProductUpdate/ProductUpdate";
 import ErrorPages from "../pages/ErrorPages/ErrorPages";
 import CouponUpdate from "../Components/CouponUpdate";
 import PrivetRoutes from "../pages/PrivetRoutes/PrivetRoutes";
+import About from "../pages/About/About";
+import Pricing from "../pages/Pricing/Pricing";
+import Features from "../pages/Features/Features";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +38,18 @@ const router = createBrowserRouter([
       {
         path: "products",
         Component: Products,
+      },
+      {
+        path: "about",
+        Component: About,
+      },
+      {
+        path: "pricing",
+        Component: Pricing,
+      },
+      {
+        path: "features",
+        Component: Features,
       },
       {
         path: "product-details/:id",

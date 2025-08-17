@@ -30,6 +30,35 @@ const Navbar = () => {
           Products
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to={"about"}
+          className={"hover:bg-indigo-700 hover:text-white"}
+        >
+          About
+        </NavLink>
+      </li>
+
+      {loginUser && (
+        <>
+          <li>
+            <NavLink
+              to={"pricing"}
+              className={"hover:bg-indigo-700 hover:text-white"}
+            >
+              Pricing
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to={"features"}
+              className={"hover:bg-indigo-700 hover:text-white"}
+            >
+              Features
+            </NavLink>
+          </li>
+        </>
+      )}
     </>
   );
 
