@@ -143,7 +143,7 @@ const AddProduct = () => {
         cancelButtonText: "Cancel",
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate("/dashboard/myProfile");
+          navigate("/dashboard/my-profile");
         }
       });
     }
@@ -155,218 +155,225 @@ const AddProduct = () => {
 
   return (
     <div
+      className="bg-gray-50 p-4 sm:p-6 md:p-8"
       data-aos="zoom-out-up"
-      className="max-w-4xl mx-auto px-3 md:px-6 py-5 md:py-10 bg-white rounded-2xl shadow-xl"
       data-aos-duration="700"
     >
-      <h2
-        className="text-3xl font-bold text-center text-blue-700 mb-10"
-        data-aos="zoom-in"
-      >
-        Add New Product
-      </h2>
-
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        <div data-aos="fade-up">
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Upload Product Image
-          </label>
-          <input
-            type="hidden"
-            {...register("photo", { required: "Image is required" })}
-          />
-
-          {profilePic ? (
-            <div className="relative w-28 h-28 mx-auto">
-              <img
-                src={profilePic}
-                alt="Preview"
-                className="w-28 h-28 object-cover rounded-full border-4 border-blue-500 shadow-md"
-              />
-              <button
-                type="button"
-                onClick={handleRemove}
-                className="absolute -top-2 -right-2 bg-red-600 text-white rounded-full p-1 hover:bg-red-700"
-              >
-                ✕
-              </button>
-            </div>
-          ) : (
-            <div
-              {...getRootProps()}
-              className={`flex flex-col items-center justify-center h-32 border-2 border-dashed rounded-xl bg-gray-50 transition cursor-pointer ${
-                errors.photo
-                  ? "border-red-500 bg-red-50"
-                  : "border-gray-300 hover:border-blue-500 hover:bg-blue-50"
-              }`}
-            >
-              <input {...getInputProps()} />
-              {uploading ? (
-                <p className="text-sm text-blue-500 animate-pulse">
-                  Uploading...
-                </p>
-              ) : (
-                <>
-                  <svg
-                    className="w-8 h-8 text-gray-400 mb-2"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M3 15a4 4 0 004 4h10a4 4 0 004-4m-4-4l-4-4m0 0L8 11m4-4v12"
-                    />
-                  </svg>
-                  <p className="text-sm text-gray-600">
-                    Click or drag to upload
-                  </p>
-                </>
-              )}
-            </div>
-          )}
-          {errors.photo && (
-            <p className="text-red-500 text-xs mt-2">{errors.photo.message}</p>
-          )}
-        </div>
-
-        <div data-aos="fade-up">
-          <label className="block text-sm font-semibold text-gray-700 mb-1">
-            Product Name
-          </label>
-          <input
-            type="text"
-            {...register("productName", {
-              required: "Product Name is required",
-            })}
-            placeholder="Enter product name"
-            className={`w-full px-4 py-2 rounded-md border ${
-              errors.productName ? "border-red-500" : "border-gray-300"
-            } focus:outline-none focus:ring-2 focus:ring-blue-300`}
-          />
-          {errors.productName && (
-            <p className="text-red-500 text-xs mt-1">
-              {errors.productName.message}
-            </p>
-          )}
-        </div>
-
-        <div data-aos="fade-up">
-          <label className="block text-sm font-semibold text-gray-700 mb-1">
-            Description
-          </label>
-          <textarea
-            {...register("description", {
-              required: "Description is required",
-            })}
-            placeholder="Describe the product..."
-            className={`w-full px-4 py-2 border rounded-md h-28 resize-none ${
-              errors.description ? "border-red-500" : "border-gray-300"
-            } focus:outline-none focus:ring-2 focus:ring-blue-300`}
-          ></textarea>
-          {errors.description && (
-            <p className="text-red-500 text-xs mt-1">
-              {errors.description.message}
-            </p>
-          )}
-        </div>
-
-        <div data-aos="fade-up">
-          <label className="block text-sm font-semibold text-gray-700 mb-1">
-            External Link
-          </label>
-          <input
-            type="url"
-            {...register("externalLink", {
-              required: "External link is required",
-            })}
-            placeholder="https://example.com"
-            className={`w-full px-4 py-2 border rounded-md ${
-              errors.externalLink ? "border-red-500" : "border-gray-300"
-            } focus:outline-none focus:ring-2 focus:ring-blue-300`}
-          />
-          {errors.externalLink && (
-            <p className="text-red-500 text-xs mt-1">
-              {errors.externalLink.message}
-            </p>
-          )}
-        </div>
-
-        <div data-aos="fade-up">
-          <label className="block text-sm font-semibold text-gray-700 mb-1">
-            Tags (Drag to reorder)
-          </label>
-          <ReactTags
-            tags={tags}
-            delimiters={delimiters}
-            handleDelete={handleDelete}
-            handleAddition={handleAddition}
-            handleDrag={handleDrag}
-            inputFieldPosition="bottom"
-            placeholder="Add a tag and press Enter"
-            classNames={{
-              tagInputField:
-                "w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none",
-              tag: "inline-flex items-center px-3 py-1 bg-blue-100 text-blue-700 rounded-full mr-2 mb-2",
-              remove: "ml-2 text-red-500 cursor-pointer",
-            }}
-          />
-        </div>
-
-        <div
-          className="border-t border-dashed border-gray-400 pt-6 space-y-4"
-          data-aos="fade-up"
+      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-6 md:p-10">
+        <h2
+          className="text-3xl md:text-4xl font-bold text-center text-blue-700 mb-8 md:mb-12"
+          data-aos="zoom-in"
         >
-          <p className="text-lg font-bold text-gray-700">Product Owner Info</p>
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">
-              Owner Name
-            </label>
-            <input
-              {...register("ownerName")}
-              type="text"
-              defaultValue={loginUser?.displayName || ""}
-              readOnly
-              className="w-full px-4 py-2 border rounded-md bg-gray-100 border-gray-300 text-gray-600"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">
-              Owner Photo
-            </label>
-            <input
-              {...register("ownerImage")}
-              type="url"
-              defaultValue={loginUser?.photoURL || ""}
-              readOnly
-              className="w-full px-4 py-2 border rounded-md bg-gray-100 border-gray-300 text-gray-600"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">
-              Owner Email
-            </label>
-            <input
-              {...register("ownerEmail")}
-              type="email"
-              defaultValue={loginUser?.email || ""}
-              readOnly
-              className="w-full px-4 py-2 border rounded-md bg-gray-100 border-gray-300 text-gray-600"
-            />
-          </div>
-        </div>
+          Add New Product
+        </h2>
 
-        <div>
-          <button
-            type="submit"
-            className="w-full mt-6 bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition text-lg font-semibold"
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+          <div data-aos="fade-up">
+            <label className="block text-base font-semibold text-gray-800 mb-2">
+              Product Image
+            </label>
+            <input
+              type="hidden"
+              {...register("photo", { required: "Image is required" })}
+            />
+
+            {profilePic ? (
+              <div className="relative w-32 h-32 mx-auto group">
+                <img
+                  src={profilePic}
+                  alt="Preview"
+                  className="w-32 h-32 object-cover rounded-full border-4 border-blue-500 shadow-lg"
+                />
+                <button
+                  type="button"
+                  onClick={handleRemove}
+                  className="absolute -top-2 -right-2 bg-red-600 text-white rounded-full p-1.5 hover:bg-red-700 transition-transform transform group-hover:scale-110"
+                >
+                  ✕
+                </button>
+              </div>
+            ) : (
+              <div
+                {...getRootProps()}
+                className={`flex flex-col items-center justify-center h-40 border-2 border-dashed rounded-xl bg-gray-50 transition-all cursor-pointer ${
+                  errors.photo
+                    ? "border-red-500 bg-red-50"
+                    : "border-gray-300 hover:border-blue-500 hover:bg-blue-50"
+                }`}
+              >
+                <input {...getInputProps()} />
+                {uploading ? (
+                  <p className="text-lg text-blue-500 animate-pulse font-semibold">
+                    Uploading...
+                  </p>
+                ) : (
+                  <div className="text-center text-gray-500">
+                    <svg
+                      className="w-10 h-10 mx-auto mb-2"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M3 15a4 4 0 004 4h10a4 4 0 004-4m-4-4l-4-4m0 0L8 11m4-4v12"
+                      />
+                    </svg>
+                    <p className="text-base font-medium">
+                      Click or drag to upload
+                    </p>
+                    <p className="text-xs mt-1">PNG, JPG, GIF up to 10MB</p>
+                  </div>
+                )}
+              </div>
+            )}
+            {errors.photo && (
+              <p className="text-red-500 text-sm mt-2 text-center">
+                {errors.photo.message}
+              </p>
+            )}
+          </div>
+
+          <div data-aos="fade-up">
+            <label className="block text-base font-semibold text-gray-800 mb-2">
+              Product Name
+            </label>
+            <input
+              type="text"
+              {...register("productName", {
+                required: "Product Name is required",
+              })}
+              placeholder="Enter product name"
+              className={`w-full px-5 py-3 rounded-lg border ${
+                errors.productName ? "border-red-500" : "border-gray-300"
+              } focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow`}
+            />
+            {errors.productName && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.productName.message}
+              </p>
+            )}
+          </div>
+
+          <div data-aos="fade-up">
+            <label className="block text-base font-semibold text-gray-800 mb-2">
+              Description
+            </label>
+            <textarea
+              {...register("description", {
+                required: "Description is required",
+              })}
+              placeholder="Describe the product..."
+              className={`w-full px-5 py-3 border rounded-lg h-32 resize-none ${
+                errors.description ? "border-red-500" : "border-gray-300"
+              } focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow`}
+            ></textarea>
+            {errors.description && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.description.message}
+              </p>
+            )}
+          </div>
+
+          <div data-aos="fade-up">
+            <label className="block text-base font-semibold text-gray-800 mb-2">
+              External Link
+            </label>
+            <input
+              type="url"
+              {...register("externalLink", {
+                required: "External link is required",
+              })}
+              placeholder="https://example.com"
+              className={`w-full px-5 py-3 border rounded-lg ${
+                errors.externalLink ? "border-red-500" : "border-gray-300"
+              } focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow`}
+            />
+            {errors.externalLink && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.externalLink.message}
+              </p>
+            )}
+          </div>
+
+          <div data-aos="fade-up">
+            <label className="block text-base font-semibold text-gray-800 mb-2">
+              Tags (Drag to reorder)
+            </label>
+            <ReactTags
+              tags={tags}
+              delimiters={delimiters}
+              handleDelete={handleDelete}
+              handleAddition={handleAddition}
+              handleDrag={handleDrag}
+              inputFieldPosition="bottom"
+              placeholder="Add a tag and press Enter"
+              classNames={{
+                tagInputField:
+                  "w-full px-5 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow mt-2",
+                tag: "inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 rounded-full mr-2 mb-2 text-sm font-semibold",
+                remove: "ml-2 text-red-500 cursor-pointer text-lg",
+              }}
+            />
+          </div>
+
+          <div
+            className="border-t border-gray-200 pt-8 space-y-6"
+            data-aos="fade-up"
           >
-            Submit Product
-          </button>
-        </div>
-      </form>
+            <p className="text-xl font-bold text-gray-800">
+              Product Owner Info
+            </p>
+            <div>
+              <label className="block text-base font-semibold text-gray-800 mb-2">
+                Owner Name
+              </label>
+              <input
+                {...register("ownerName")}
+                type="text"
+                defaultValue={loginUser?.displayName || ""}
+                readOnly
+                className="w-full px-5 py-3 border rounded-lg bg-gray-100 border-gray-300 text-gray-600 cursor-not-allowed"
+              />
+            </div>
+            <div>
+              <label className="block text-base font-semibold text-gray-800 mb-2">
+                Owner Photo URL
+              </label>
+              <input
+                {...register("ownerImage")}
+                type="url"
+                defaultValue={loginUser?.photoURL || ""}
+                readOnly
+                className="w-full px-5 py-3 border rounded-lg bg-gray-100 border-gray-300 text-gray-600 cursor-not-allowed"
+              />
+            </div>
+            <div>
+              <label className="block text-base font-semibold text-gray-800 mb-2">
+                Owner Email
+              </label>
+              <input
+                {...register("ownerEmail")}
+                type="email"
+                defaultValue={loginUser?.email || ""}
+                readOnly
+                className="w-full px-5 py-3 border rounded-lg bg-gray-100 border-gray-300 text-gray-600 cursor-not-allowed"
+              />
+            </div>
+          </div>
+
+          <div className="pt-6">
+            <button
+              type="submit"
+              className="w-full bg-blue-600 text-white py-4 rounded-lg hover:bg-blue-700 transition-all duration-300 text-lg font-bold shadow-lg hover:shadow-xl transform hover:scale-105"
+            >
+              Submit Product
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

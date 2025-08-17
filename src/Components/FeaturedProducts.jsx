@@ -66,71 +66,97 @@ const FeaturedProducts = () => {
   };
 
   return (
-    <div data-aos="fade-up" className="max-w-7xl mx-auto px-4 py-12">
-      <h1
-        className="text-blue-700 my-10 text-center font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl hover:scale-110 transition-all duration-800"
-      >
-        Featured Products
-      </h1>
+    <div className="py-12 md:py-16 lg:py-20" data-aos="fade-up">
+      <div className="container mx-auto px-4">
+        <h1 className="text-blue-700 text-center font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-8 md:mb-12 hover:scale-105 transition-all duration-800">
+          Featured Products
+        </h1>
 
-      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {featuredProducts?.map(
-          ({ _id, productName, productImage, tags, votes, ownerEmail }) => (
-            <div
-              key={_id}
-              className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 p-5 flex flex-col"
-              data-aos="zoom-in"
-            >
-              <div className="h-48 flex justify-center items-center overflow-hidden mb-4">
-                <img
-                  src={productImage}
-                  alt={productName}
-                  className="object-cover h-40 w-40 rounded-full border-2 border-gray-200 shadow-sm"
-                />
-              </div>
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {featuredProducts?.map(
+            ({
+              _id,
+              productName,
+              productImage,
+              tags,
+              votes,
+              ownerEmail,
+              description,
+            }) => (
+              <div
+                key={_id}
+                className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 p-6 flex flex-col items-center"
+                data-aos="zoom-in"
+              >
+                <div className="w-40 h-40 rounded-full overflow-hidden mb-4 border-4 border-gray-200 shadow-md">
+                  <img
+                    src={productImage}
+                    alt={productName}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
 
-              <Link to={`/product-details/${_id}`}>
-                <h3 className="text-lg font-bold text-gray-900 mb-2 text-center">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">
                   {productName}
                 </h3>
-              </Link>
-              <div className="flex flex-wrap justify-center gap-2 mb-4">
-                {tags?.length > 0 ? (
-                  tags.map((tag, idx) => (
-                    <span
-                      key={idx}
-                      className="bg-blue-100 text-blue-800 text-xs font-medium px-3 py-1 rounded-full"
-                    >
-                      #{tag}
-                    </span>
-                  ))
-                ) : (
-                  <span className="text-xs text-gray-400 italic">No tags</span>
-                )}
-              </div>
 
-              <div className="flex items-center justify-between mt-auto">
-                <button
-                  onClick={() => handleVote(_id)}
-                  className={`flex items-center gap-2 text-sm font-semibold transition ${
-                    loginUser?.email === ownerEmail
-                      ? "text-gray-400 cursor-not-allowed"
-                      : "text-gray-700 hover:text-blue-700"
-                  }`}
-                  disabled={loginUser?.email === ownerEmail}
-                  title={
-                    loginUser?.email === ownerEmail
-                      ? "You cannot vote on your own product"
-                      : "Upvote this product"
-                  }
-                >
-                  <FaThumbsUp className="text-blue-600" size={18} />
-                  <span className="animate-pulse">{votes || 0} votes</span>
-                </button>
+                <div className="flex items-center mb-4">
+                  <div className="flex-1">
+                    <p className="text-gray-600 text-nowrap mr-2">
+                      {description.split(" ").slice(0, 3).join(" ")}
+                    </p>
+                  </div>
+                  <div className="flex-1">
+                    <Link
+                      to={`/product-details/${_id}`}
+                      className="text-blue-500 hover:underline text-nowrap"
+                    >
+                      See More
+                    </Link>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap justify-center gap-2 mb-4">
+                  {tags?.length > 0 ? (
+                    tags.map((tag, idx) => (
+                      <span
+                        key={idx}
+                        className="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full"
+                      >
+                        #{tag}
+                      </span>
+                    ))
+                  ) : (
+                    <span className="text-xs text-gray-400 italic">
+                      No tags
+                    </span>
+                  )}
+                </div>
+
+                <div className="mt-auto flex items-center gap-4">
+                  <button
+                    onClick={() => handleVote(_id)}
+                    className={`flex items-center gap-2 text-sm font-semibold transition ${
+                      loginUser?.email === ownerEmail
+                        ? "text-gray-400 cursor-not-allowed"
+                        : "text-gray-700 hover:text-blue-700"
+                    }`}
+                    disabled={loginUser?.email === ownerEmail}
+                    title={
+                      loginUser?.email === ownerEmail
+                        ? "You cannot vote on your own product"
+                        : "Upvote this product"
+                    }
+                  >
+                    <FaThumbsUp className="text-blue-600" size={18} />
+                    <span className="font-bold text-lg">{votes || 0}</span>
+                    <span className="text-gray-600">votes</span>
+                  </button>
+                </div>
               </div>
-            </div>
-          )
-        )}
+            )
+          )}
+        </div>
       </div>
     </div>
   );

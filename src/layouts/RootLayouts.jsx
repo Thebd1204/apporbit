@@ -27,15 +27,15 @@ const RootLayouts = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col font-Poppins">
+    <div className="min-h-screen max-w-[1536px] flex flex-col font-Poppins w-11/12 mx-auto">
       <header>
-        <div className="w-11/12 mx-auto">
+        <div className="">
           <Navbar></Navbar>
         </div>
       </header>
 
       <main className="flex-1">
-        <div className="w-11/12 mx-auto my-10">
+        <div className="my-10">
           {state === "loading" ? <LoadingSpinners /> : <Outlet></Outlet>}
         </div>
       </main>
