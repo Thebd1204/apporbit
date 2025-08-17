@@ -215,7 +215,7 @@ const Products = () => {
 };
 
 const ProductCard = ({ product, handleVote, loginUserEmail }) => {
-  const { _id, productName, productImage, tags, votes, ownerEmail } = product;
+  const { _id, productName, description, productImage, tags, votes, ownerEmail } = product;
   const isOwner = loginUserEmail === ownerEmail;
 
   return (
@@ -236,6 +236,22 @@ const ProductCard = ({ product, handleVote, loginUserEmail }) => {
           {productName}
         </h3>
       </Link>
+
+      <div className="flex items-center mb-4">
+        <div className="flex-1">
+          <p className="text-gray-600 text-nowrap mr-2">
+            {description.split(" ").slice(0, 3).join(" ")}
+          </p>
+        </div>
+        <div className="flex-1">
+          <Link
+            to={`/product-details/${_id}`}
+            className="text-blue-500 hover:underline text-nowrap"
+          >
+            See More
+          </Link>
+        </div>
+      </div>
 
       <div className="flex flex-wrap justify-center gap-2 mb-4">
         {tags?.length > 0 ? (

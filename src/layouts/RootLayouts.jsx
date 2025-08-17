@@ -5,6 +5,7 @@ import LoadingSpinners from "./../Components/LoadingSpinners";
 import Footer from "../Components/Footer";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { FaArrowUp } from "react-icons/fa";
 
 const RootLayouts = () => {
   const { state } = useNavigate();
@@ -27,22 +28,28 @@ const RootLayouts = () => {
   }, []);
 
   return (
-    <div className="min-h-screen max-w-[1536px] flex flex-col font-Poppins w-11/12 mx-auto">
+    <div className="min-h-screen flex flex-col font-Poppins max-w-[1536px] mx-auto">
       <header>
-        <div className="">
-          <Navbar></Navbar>
-        </div>
+        <Navbar></Navbar>
       </header>
 
-      <main className="flex-1">
-        <div className="my-10">
-          {state === "loading" ? <LoadingSpinners /> : <Outlet></Outlet>}
+      <main className="flex-1 pt-20">
+        <div className="">
+          <div className=" my-10">
+            {state === "loading" ? <LoadingSpinners /> : <Outlet></Outlet>}
+          </div>
         </div>
       </main>
 
       <footer>
         <Footer></Footer>
       </footer>
+      <button
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className="fixed bottom-6 right-6 p-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg cursor-pointer transition-all duration-300 hover:scale-110 hover:shadow-xl"
+      >
+        <FaArrowUp className="text-lg" />
+      </button>
     </div>
   );
 };
